@@ -1,0 +1,25 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>BANTER banner</title>
+<desc>README banner for BANTER, the Smalltalk IDE, showing two speech bubbles beside the project name and tagline</desc>
+<defs>
+<linearGradient id="bubble1c" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#7F77DD"/>
+<stop offset="100%" stop-color="#534AB7"/>
+</linearGradient>
+<linearGradient id="bubble2c" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#5DCAA5"/>
+<stop offset="100%" stop-color="#1D9E75"/>
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="1200" height="300" rx="20" fill="#1D2126"/>
+<g transform="translate(30,20) scale(0.867)">
+<rect x="0" y="0" width="300" height="300" rx="40" fill="#23272D"/>
+<path d="M64 84 Q64 60 88 60 L172 60 Q196 60 196 84 L196 136 Q196 160 172 160 L108 160 L76 188 L84 160 Q64 158 64 136 Z" fill="url(#bubble1c)" stroke="#3C3489" stroke-width="1.5"/>
+<text x="130" y="118" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="700" fill="#F0EEFB" text-anchor="middle">Hi</text>
+<path d="M236 144 Q236 124 216 124 L152 124 Q132 124 132 144 L132 190 Q132 210 152 210 L200 210 L228 234 L222 210 Q236 208 236 190 Z" fill="url(#bubble2c)" stroke="#085041" stroke-width="1.5"/>
+<text x="184" y="176" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="700" fill="#EAFBF4" text-anchor="middle">Hey!</text>
+</g>
+<text x="300" y="145" font-family="'Segoe UI', Arial, sans-serif" font-size="72" font-weight="700" fill="#E8E6F5" letter-spacing="4">BANTER</text>
+<text x="302" y="185" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#A39FC4">Smalltalk Interpreted Development Environment</text>
+<text x="302" y="220" font-family="'Segoe UI', Arial, sans-serif" font-size="17" fill="#726E8C">Part of the Fragillidae IDE Suite 2</text>
+</svg>

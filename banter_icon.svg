@@ -1,0 +1,19 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>BANTER IDE icon</title>
+<desc>Two overlapping speech bubbles containing short greeting text, representing a message exchange for the BANTER Smalltalk IDE</desc>
+<defs>
+<linearGradient id="bubble1b" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#7F77DD"/>
+<stop offset="100%" stop-color="#534AB7"/>
+</linearGradient>
+<linearGradient id="bubble2b" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#5DCAA5"/>
+<stop offset="100%" stop-color="#1D9E75"/>
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="300" height="300" rx="52" fill="#1D2126"/>
+<path d="M64 84 Q64 60 88 60 L172 60 Q196 60 196 84 L196 136 Q196 160 172 160 L108 160 L76 188 L84 160 Q64 158 64 136 Z" fill="url(#bubble1b)" stroke="#3C3489" stroke-width="1.5"/>
+<text x="130" y="118" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="700" fill="#F0EEFB" text-anchor="middle">Hi</text>
+<path d="M236 144 Q236 124 216 124 L152 124 Q132 124 132 144 L132 190 Q132 210 152 210 L200 210 L228 234 L222 210 Q236 208 236 190 Z" fill="url(#bubble2b)" stroke="#085041" stroke-width="1.5"/>
+<text x="184" y="176" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="700" fill="#EAFBF4" text-anchor="middle">Hey!</text>
+</svg>
