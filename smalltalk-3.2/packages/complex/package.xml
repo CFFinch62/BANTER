@@ -1,0 +1,14 @@
+<package>
+  <name>Complex</name>
+
+  <filein>Complex.st</filein>
+
+  <test>
+   <sunit>ComplexTest</sunit>
+   <filein>complextests.st</filein>
+  </test>
+
+  <file>Complex.st</file>
+  <file>complextests.st</file>
+  <file>ChangeLog</file>
+</package>

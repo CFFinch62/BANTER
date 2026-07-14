@@ -1,0 +1,76 @@
+compiler.st:40: undefined variable undefVariable referenced
+
+Execution begins...
+returned value is Array new: 3 "<0>"
+
+Execution begins...
+returned value is 'bar'
+
+Execution begins...
+returned value is 100
+compiler.st:118: parse error, expected '!'
+compiler.st:121: parse error, expected keyword
+
+Execution begins...
+returned value is 2
+
+Execution begins...
+returned value is 'No crashes'
+compiler.st:131: undefined variable C referenced
+
+Execution begins...
+a Smalltalk string:1: undefined variable a referenced
+returned value is nil
+
+Execution begins...
+ error: did not understand #gotcha
+returned value is nil
+
+Execution begins...
+returned value is 'nineteen'
+
+Execution begins...
+returned value is 'ABC'
+
+Execution begins...
+returned value is 0
+
+Execution begins...
+returned value is 0
+
+Execution begins...
+returned value is 0
+
+Execution begins...
+returned value is 0
+
+Execution begins...
+returned value is 0
+
+Execution begins...
+returned value is 0.00000
+
+Execution begins...
+returned value is '-123.000s3'
+
+Execution begins...
+a Smalltalk string:1: parse error, expected positive numeric literal
+returned value is CompiledMethod new: 6 "<0>"
+
+Execution begins...
+a Smalltalk string:1: parse error, expected positive numeric literal
+returned value is CompiledMethod new: 6 "<0>"
+
+Execution begins...
+a Smalltalk string:1: parse error, expected positive numeric literal
+returned value is CompiledMethod new: 6 "<0>"
+
+Execution begins...
+a Smalltalk string:1: parse error, expected positive numeric literal
+returned value is CompiledMethod new: 6 "<0>"
+
+Execution begins...
+returned value is FileSegment
+
+Execution begins...
+returned value is String

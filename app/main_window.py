@@ -134,6 +134,10 @@ class MainWindow(QMainWindow):
         console_position_group.addAction(self.console_right_action)
         self.console_right_action.triggered.connect(lambda checked: self._set_console_position("right") if checked else None)
 
+        help_menu = menubar.addMenu("&Help")
+        about_action = help_menu.addAction("&About")
+        about_action.triggered.connect(self._show_about)
+
         theme_menu = menubar.addMenu("&Theme")
         self.theme_actions = {}
         for theme_name in self.theme_manager.available_themes():
@@ -279,6 +283,22 @@ class MainWindow(QMainWindow):
 
     def _open_find_replace(self) -> None:
         self.find_replace_dialog.open_for_editor(self._current_editor())
+
+    def _show_about(self) -> None:
+        about_box = QMessageBox(self)
+        about_box.setWindowTitle("About Banter IDE")
+        about_box.setTextFormat(Qt.TextFormat.RichText)
+        about_box.setText(
+            "<h3>Banter IDE — Banter Development Environment</h3>"
+            "<p><b>Version 0.1.0</b></p>"
+            "<p>A beginner-friendly IDE for learning and teaching Banter.</p>"
+            "<p>© 2026 Chuck Finch — Fragillidae Software</p>"
+        )
+        icon = self.windowIcon()
+        if not icon.isNull():
+            about_box.setIconPixmap(icon.pixmap(96, 96))
+        about_box.setStandardButtons(QMessageBox.StandardButton.Ok)
+        about_box.exec()
 
     def _update_title(self) -> None:
         editor = self._current_editor()

@@ -1,0 +1,488 @@
+This is gst-libs.info, produced by makeinfo version 4.13 from
+/home/pbonzini/devel/gst/+build/doc/../../doc/gst-libs-fixed.texi.
+
+INFO-DIR-SECTION Software development
+START-INFO-DIR-ENTRY
+* Smalltalk libraries: (gst-libs).      The GNU Smalltalk class libraries.
+END-INFO-DIR-ENTRY
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with no Front-Cover Texts,
+     and with no Back-Cover Texts.  A copy of the license is included
+     in the section entitled "GNU Free Documentation License".
+
+
+Indirect:
+gst-libs.info-1: 694
+gst-libs.info-2: 298834
+gst-libs.info-3: 425226
+
+Tag Table:
+(Indirect)
+Node: Top694
+Node: BLOX package2062
+Node: BLOX.BArc4692
+Node: BLOX.BArc-accessing5013
+Node: BLOX.BBalloon6559
+Node: BLOX.BBalloon class-accessing7039
+Node: BLOX.BBalloon-accessing7467
+Node: BLOX.BBalloon-initializing7863
+Node: BLOX.BBoundingBox8113
+Node: BLOX.BBoundingBox-accessing8592
+Node: BLOX.BButton11333
+Node: BLOX.BButton class-instance creation11816
+Node: BLOX.BButton-accessing12164
+Node: BLOX.BButtonLike16365
+Node: BLOX.BButtonLike-accessing16720
+Node: BLOX.BCanvas17521
+Node: BLOX.BCanvas-accessing18295
+Node: BLOX.BCanvas-geometry management19155
+Node: BLOX.BCanvas-widget protocol20874
+Node: BLOX.BCanvasObject22099
+Node: BLOX.BCanvasObject class-instance creation22649
+Node: BLOX.BCanvasObject-accessing23066
+Node: BLOX.BCanvasObject-widget protocol25016
+Node: BLOX.BCheckMenuItem26301
+Node: BLOX.BCheckMenuItem class-instance creation26756
+Node: BLOX.BCheckMenuItem-accessing27079
+Node: BLOX.BColorButton27541
+Node: BLOX.BColorButton-accessing27978
+Node: BLOX.BContainer28445
+Node: BLOX.BContainer-accessing28900
+Node: BLOX.BDialog29572
+Node: BLOX.BDialog class-instance creation30203
+Node: BLOX.BDialog class-prompters31120
+Node: BLOX.BDialog-accessing34677
+Node: BLOX.BDialog-widget protocol35885
+Node: BLOX.BDropDown36787
+Node: BLOX.BDropDown-accessing37727
+Node: BLOX.BDropDown-callbacks43025
+Node: BLOX.BDropDown-flexibility43651
+Node: BLOX.BDropDown-list box accessing45146
+Node: BLOX.BDropDown-widget protocol48197
+Node: BLOX.BDropDownEdit49140
+Node: BLOX.BDropDownEdit-accessing49684
+Node: BLOX.BDropDownEdit-accessing-overrides51858
+Node: BLOX.BDropDownEdit-text accessing52175
+Node: BLOX.BDropDownList53585
+Node: BLOX.BDropDownList-accessing54142
+Node: BLOX.BDropDownList-callbacks56847
+Node: BLOX.BDropDownList-list box accessing57547
+Node: BLOX.BEdit57987
+Node: BLOX.BEdit class-instance creation58412
+Node: BLOX.BEdit-accessing58750
+Node: BLOX.BEdit-widget protocol63133
+Node: BLOX.BEmbeddedImage65111
+Node: BLOX.BEmbeddedImage-accessing65470
+Node: BLOX.BEmbeddedText66419
+Node: BLOX.BEmbeddedText-accessing66789
+Node: BLOX.BEventSet69745
+Node: BLOX.BEventSet class-initializing70451
+Node: BLOX.BEventSet-accessing70919
+Node: BLOX.BEventSet-initializing71208
+Node: BLOX.BEventTarget71591
+Node: BLOX.BEventTarget-intercepting events71970
+Node: BLOX.BExtended78044
+Node: BLOX.BExtended-accessing78870
+Node: BLOX.BExtended-customization79134
+Node: BLOX.BForm80148
+Node: BLOX.BForm-accessing80529
+Node: BLOX.BImage81982
+Node: BLOX.BImage class-arrows82575
+Node: BLOX.BImage class-GNU83077
+Node: BLOX.BImage class-icons83331
+Node: BLOX.BImage class-instance creation83844
+Node: BLOX.BImage class-small icons84602
+Node: BLOX.BImage-accessing84984
+Node: BLOX.BImage-image management88120
+Node: BLOX.BImage-widget protocol90646
+Node: BLOX.BLabel90955
+Node: BLOX.BLabel class-initialization91355
+Node: BLOX.BLabel class-instance creation91635
+Node: BLOX.BLabel-accessing92020
+Node: BLOX.BLine96735
+Node: BLOX.BLine-accessing97089
+Node: BLOX.BList97659
+Node: BLOX.BList-accessing98042
+Node: BLOX.BList-widget protocol110092
+Node: BLOX.Blox111475
+Node: BLOX.Blox class-C call-outs112612
+Node: BLOX.Blox class-event dispatching112941
+Node: BLOX.Blox class-instance creation113912
+Node: BLOX.Blox class-utility114362
+Node: BLOX.Blox-accessing117555
+Node: BLOX.Blox-basic118910
+Node: BLOX.Blox-creating children119507
+Node: BLOX.Blox-customization120528
+Node: BLOX.Blox-widget protocol121325
+Node: BLOX.BMenu123586
+Node: BLOX.BMenu class-instance creation123992
+Node: BLOX.BMenu-accessing124409
+Node: BLOX.BMenu-callback registration125258
+Node: BLOX.BMenuBar126356
+Node: BLOX.BMenuBar-accessing126699
+Node: BLOX.BMenuItem126934
+Node: BLOX.BMenuItem class-instance creation127432
+Node: BLOX.BMenuItem-accessing127836
+Node: BLOX.BMenuObject128664
+Node: BLOX.BMenuObject-accessing129071
+Node: BLOX.BMenuObject-callback131418
+Node: BLOX.BOval132374
+Node: BLOX.BPolyline132706
+Node: BLOX.BPolyline-accessing133053
+Node: BLOX.BPopupMenu135379
+Node: BLOX.BPopupMenu-widget protocol135804
+Node: BLOX.BPopupWindow136021
+Node: BLOX.BPopupWindow-geometry management136632
+Node: BLOX.BPrimitive138700
+Node: BLOX.BPrimitive-accessing139099
+Node: BLOX.BProgress139330
+Node: BLOX.BProgress-accessing139670
+Node: BLOX.BRadioButton140916
+Node: BLOX.BRadioButton-accessing141273
+Node: BLOX.BRadioGroup142161
+Node: BLOX.BRadioGroup-accessing142802
+Node: BLOX.BRadioGroup-widget protocol143277
+Node: BLOX.BRectangle143607
+Node: BLOX.BRectangle-accessing143963
+Node: BLOX.BScrolledCanvas144451
+Node: BLOX.BSpline144888
+Node: BLOX.BSpline-accessing145233
+Node: BLOX.BText145664
+Node: BLOX.BText class-accessing146297
+Node: BLOX.BText class-instance creation146640
+Node: BLOX.BText-accessing147008
+Node: BLOX.BText-attributes152875
+Node: BLOX.BText-geometry management154146
+Node: BLOX.BText-images155725
+Node: BLOX.BText-inserting text157417
+Node: BLOX.BText-position & lines159433
+Node: BLOX.BTextAttributes161240
+Node: BLOX.BTextAttributes class-instance-creation shortcuts161714
+Node: BLOX.BTextAttributes-colors164578
+Node: BLOX.BTextAttributes-setting attributes165667
+Node: BLOX.BTextBindings169825
+Node: BLOX.BTextBindings class-instance creation170377
+Node: BLOX.BTextTags170629
+Node: BLOX.BToggle171006
+Node: BLOX.BToggle-accessing171403
+Node: BLOX.BTransientWindow172301
+Node: BLOX.BTransientWindow class-instance creation172828
+Node: BLOX.BTransientWindow-widget protocol173447
+Node: BLOX.BViewport174039
+Node: BLOX.BViewport-accessing174488
+Node: BLOX.BViewport-scrollbars174748
+Node: BLOX.BWidget175708
+Node: BLOX.BWidget class-popups176285
+Node: BLOX.BWidget-accessing177540
+Node: BLOX.BWidget-customization182166
+Node: BLOX.BWidget-geometry management183795
+Node: BLOX.BWidget-widget protocol200261
+Node: BLOX.BWindow202302
+Node: BLOX.BWindow class-instance creation202763
+Node: BLOX.BWindow-accessing203200
+Node: BLOX.BWindow-widget protocol205937
+Node: BLOX.Gui210647
+Node: BLOX.Gui-accessing211055
+Node: Complex package211316
+Node: Complex211589
+Node: Complex class-instance creation212355
+Node: Complex-comparing213048
+Node: Complex-converting213445
+Node: Complex-creation/coercion213927
+Node: Complex-math214430
+Node: Complex-printing215093
+Node: Complex-testing215326
+Node: Complex-transcendental functions215652
+Node: DBI package216544
+Node: DBI.ColumnInfo217080
+Node: DBI.ColumnInfo-accessing217366
+Node: DBI.ColumnInfo-printing217903
+Node: DBI.Connection218226
+Node: DBI.Connection class-connecting218720
+Node: DBI.Connection class-initialization219653
+Node: DBI.Connection-accessing219974
+Node: DBI.Connection-connecting220693
+Node: DBI.Connection-querying220978
+Node: DBI.ConnectionInfo221748
+Node: DBI.ConnectionInfo class-instance creation222142
+Node: DBI.ConnectionInfo-accessing222643
+Node: DBI.FieldConverter223229
+Node: DBI.FieldConverter class-instance creation223617
+Node: DBI.FieldConverter-actions223914
+Node: DBI.FieldConverter-converting-smalltalk224254
+Node: DBI.ResultSet224916
+Node: DBI.ResultSet-accessing225531
+Node: DBI.ResultSet-cursor access226516
+Node: DBI.ResultSet-printing226993
+Node: DBI.ResultSet-stream protocol227277
+Node: DBI.Row227705
+Node: DBI.Row-accessing228017
+Node: DBI.Row-printing228965
+Node: DBI.Statement229177
+Node: DBI.Statement class-instance creation229501
+Node: DBI.Statement-querying229779
+Node: DebugTools package230325
+Node: Debugger230611
+Node: Debugger class-disabling debugging231273
+Node: Debugger class-instance creation231515
+Node: Debugger class-source code231897
+Node: Debugger-inferior process properties232171
+Node: Debugger-stepping commands232671
+Node: Iconv/I18N packages233768
+Node: I18N.BigEndianFileStream236037
+Node: I18N.EncodedStream236408
+Node: I18N.EncodedStream class-initializing236954
+Node: I18N.EncodedStream class-instance creation237846
+Node: I18N.EncodedString239736
+Node: I18N.EncodedString class-accessing240552
+Node: I18N.EncodedString class-instance creation240881
+Node: I18N.EncodedString-accessing241413
+Node: I18N.EncodedString-copying242110
+Node: I18N.EncodedString-initializing242434
+Node: I18N.EncodedString-printing242752
+Node: I18N.EncodedStringFactory243190
+Node: I18N.EncodedStringFactory class-instance creation243795
+Node: I18N.EncodedStringFactory-accessing244174
+Node: I18N.EncodedStringFactory-instance creation244572
+Node: I18N.Encoder245296
+Node: I18N.Encoder class-instance creation245860
+Node: I18N.Encoder-stream operations246296
+Node: I18N.FileStreamSegment247655
+Node: I18N.FileStreamSegment-basic248096
+Node: I18N.IncompleteSequenceError248414
+Node: I18N.IncompleteSequenceError-accessing248990
+Node: I18N.InvalidCharsetError249254
+Node: I18N.InvalidCharsetError-accessing249727
+Node: I18N.InvalidSequenceError249975
+Node: I18N.InvalidSequenceError-accessing250419
+Node: I18N.LcMessages250671
+Node: I18N.LcMessages class-accessing251142
+Node: I18N.LcMessages-accessing251529
+Node: I18N.LcMessages-opening MO files252268
+Node: I18N.LcMessagesCatalog253066
+Node: I18N.LcMessagesDomain253456
+Node: I18N.LcMessagesDomain class-opening MO files254581
+Node: I18N.LcMessagesDomain-handling the cache254972
+Node: I18N.LcMessagesDomain-querying255511
+Node: I18N.LcMessagesDummyDomain256634
+Node: I18N.LcMessagesMoFileVersion0257068
+Node: I18N.LcMessagesMoFileVersion0 class-documentation257776
+Node: I18N.LcMessagesMoFileVersion0 class-plurals265840
+Node: I18N.LcMessagesMoFileVersion0-flushing the cache266490
+Node: I18N.LcMessagesTerritoryDomain266931
+Node: I18N.LcMessagesTerritoryDomain class-instance creation267420
+Node: I18N.LcMonetary267800
+Node: I18N.LcMonetary class-accessing268349
+Node: I18N.LcMonetary-printing268735
+Node: I18N.LcMonetaryISO269534
+Node: I18N.LcMonetaryISO class-accessing269843
+Node: I18N.LcNumeric270119
+Node: I18N.LcNumeric class-accessing270609
+Node: I18N.LcNumeric-printing270990
+Node: I18N.LcPrintFormats271494
+Node: I18N.LcPrintFormats-printing272072
+Node: I18N.LcTime272582
+Node: I18N.LcTime class-accessing273095
+Node: I18N.LcTime-printing273461
+Node: I18N.LcTime-tests275757
+Node: I18N.Locale275991
+Node: I18N.Locale class-C call-outs276754
+Node: I18N.Locale class-initialization276991
+Node: I18N.Locale class-instance creation277417
+Node: I18N.Locale-C call-outs278071
+Node: I18N.Locale-subobjects278317
+Node: I18N.LocaleConventions278946
+Node: I18N.LocaleConventions class-accessing279407
+Node: I18N.LocaleConventions-accessing280131
+Node: I18N.LocaleData280462
+Node: I18N.LocaleData class-accessing280989
+Node: I18N.LocaleData class-database282060
+Node: I18N.LocaleData-accessing282697
+Node: I18N.LocaleData-initialization283870
+Node: I18N.RTEAlternativeNode284270
+Node: I18N.RTEAlternativeNode class-compiling284660
+Node: I18N.RTEAlternativeNode-computing285080
+Node: I18N.RTEBinaryNode285656
+Node: I18N.RTEBinaryNode class-compiling286075
+Node: I18N.RTEBinaryNode-compiling286443
+Node: I18N.RTEBinaryNode-computing286754
+Node: I18N.RTELiteralNode287296
+Node: I18N.RTELiteralNode class-initializing287674
+Node: I18N.RTELiteralNode-computing287987
+Node: I18N.RTENegationNode288417
+Node: I18N.RTENegationNode class-initializing288802
+Node: I18N.RTENegationNode-computing289117
+Node: I18N.RTEParameterNode289574
+Node: I18N.RTEParameterNode-computing289912
+Node: I18N.RunTimeExpression290229
+Node: I18N.RunTimeExpression class-compiling290692
+Node: I18N.RunTimeExpression class-initializing291316
+Node: I18N.RunTimeExpression class-instance creation291691
+Node: I18N.RunTimeExpression-computing292066
+Node: Sockets package292491
+Node: Sockets.AbstractSocket294628
+Node: Sockets.AbstractSocket class-defaults296042
+Node: Sockets.AbstractSocket class-instance creation296971
+Node: Sockets.AbstractSocket class-timed-out operations297806
+Node: Sockets.AbstractSocket class-well known ports298834
+Node: Sockets.AbstractSocket-accessing300957
+Node: Sockets.AbstractSocket-printing302429
+Node: Sockets.AbstractSocket-socket options302761
+Node: Sockets.AbstractSocket-stream protocol303718
+Node: Sockets.AbstractSocket-testing304504
+Node: Sockets.AbstractSocketImpl304800
+Node: Sockets.AbstractSocketImpl class-abstract306093
+Node: Sockets.AbstractSocketImpl class-C call-outs306567
+Node: Sockets.AbstractSocketImpl class-C constants307648
+Node: Sockets.AbstractSocketImpl class-socket creation308188
+Node: Sockets.AbstractSocketImpl-accessing308574
+Node: Sockets.AbstractSocketImpl-asynchronous operations309759
+Node: Sockets.AbstractSocketImpl-C call-outs310519
+Node: Sockets.AbstractSocketImpl-C constants311585
+Node: Sockets.AbstractSocketImpl-socket operations311919
+Node: Sockets.AbstractSocketImpl-socket options313804
+Node: Sockets.CAddrInfoStruct315879
+Node: Sockets.CAddrInfoStruct class-C call-outs316320
+Node: Sockets.CAddrInfoStruct-C call-outs316649
+Node: Sockets.CAddrInfoStruct-C function wrappers317023
+Node: Sockets.CSockAddrIn6Struct317371
+Node: Sockets.Datagram317640
+Node: Sockets.Datagram class-instance creation318394
+Node: Sockets.Datagram-accessing319725
+Node: Sockets.DatagramSocket320778
+Node: Sockets.DatagramSocket class-accessing321974
+Node: Sockets.DatagramSocket class-initialization322666
+Node: Sockets.DatagramSocket class-instance creation323052
+Node: Sockets.DatagramSocket-accessing324094
+Node: Sockets.DatagramSocket-direct operations325098
+Node: Sockets.DatagramSocketImpl325433
+Node: Sockets.DatagramSocketImpl class-parameters326062
+Node: Sockets.DatagramSocketImpl-accessing326482
+Node: Sockets.DatagramSocketImpl-C constants326931
+Node: Sockets.DatagramSocketImpl-socket operations327401
+Node: Sockets.DummyStream328635
+Node: Sockets.ICMP6SocketImpl328906
+Node: Sockets.ICMP6SocketImpl class-C constants329534
+Node: Sockets.ICMPSocketImpl329767
+Node: Sockets.ICMPSocketImpl class-C constants330391
+Node: Sockets.IP6Address330622
+Node: Sockets.IP6Address class-C constants331325
+Node: Sockets.IP6Address class-constants331683
+Node: Sockets.IP6Address class-initialization332078
+Node: Sockets.IP6Address class-instance creation332702
+Node: Sockets.IP6Address-accessing333810
+Node: Sockets.IP6Address-printing334303
+Node: Sockets.IPAddress334557
+Node: Sockets.IPAddress class-C constants335253
+Node: Sockets.IPAddress class-constants335547
+Node: Sockets.IPAddress class-initialization335936
+Node: Sockets.IPAddress class-instance creation336560
+Node: Sockets.IPAddress-accessing340466
+Node: Sockets.IPAddress-printing341630
+Node: Sockets.MulticastSocket341879
+Node: Sockets.MulticastSocket-instance creation342670
+Node: Sockets.MulticastSocketImpl343519
+Node: Sockets.MulticastSocketImpl-multicasting344010
+Node: Sockets.OOBSocketImpl344815
+Node: Sockets.OOBSocketImpl-C constants345354
+Node: Sockets.OOBSocketImpl-implementation345606
+Node: Sockets.RawSocketImpl346026
+Node: Sockets.RawSocketImpl class-parameters346507
+Node: Sockets.ReadBuffer346765
+Node: Sockets.ReadBuffer class-instance creation347334
+Node: Sockets.ReadBuffer-accessing-reading347827
+Node: Sockets.ReadBuffer-buffer handling348892
+Node: Sockets.ServerSocket349947
+Node: Sockets.ServerSocket class-accessing350928
+Node: Sockets.ServerSocket class-instance creation351266
+Node: Sockets.ServerSocket-accessing352808
+Node: Sockets.ServerSocket-initializing353757
+Node: Sockets.Socket354172
+Node: Sockets.Socket class-accessing354708
+Node: Sockets.Socket class-tests355082
+Node: Sockets.Socket class-well known ports357624
+Node: Sockets.Socket-stream protocol357934
+Node: Sockets.SocketAddress358977
+Node: Sockets.SocketAddress class-abstract360047
+Node: Sockets.SocketAddress class-accessing360807
+Node: Sockets.SocketAddress class-C call-outs362719
+Node: Sockets.SocketAddress class-C constants363113
+Node: Sockets.SocketAddress class-creating sockets363549
+Node: Sockets.SocketAddress class-host name lookup364174
+Node: Sockets.SocketAddress class-initialization365011
+Node: Sockets.SocketAddress-accessing365909
+Node: Sockets.SocketAddress-testing366980
+Node: Sockets.SocketImpl367270
+Node: Sockets.SocketImpl class-parameters367795
+Node: Sockets.SocketImpl-abstract368077
+Node: Sockets.SocketImpl-socket operations368434
+Node: Sockets.StreamSocket368896
+Node: Sockets.StreamSocket class-accessing369668
+Node: Sockets.StreamSocket class-initialize370363
+Node: Sockets.StreamSocket class-instance creation370703
+Node: Sockets.StreamSocket-accessing371606
+Node: Sockets.StreamSocket-accessing-reading371981
+Node: Sockets.StreamSocket-out-of-band data372622
+Node: Sockets.StreamSocket-printing373002
+Node: Sockets.StreamSocket-stream protocol373332
+Node: Sockets.TCPSocketImpl374767
+Node: Sockets.TCPSocketImpl class-C constants375423
+Node: Sockets.TCPSocketImpl-socket options375759
+Node: Sockets.UDPSocketImpl376141
+Node: Sockets.UDPSocketImpl class-C constants376804
+Node: Sockets.UDPSocketImpl-multicasting377105
+Node: Sockets.UnixAddress378030
+Node: Sockets.UnixAddress class-C constants378945
+Node: Sockets.UnixAddress class-initialization379254
+Node: Sockets.UnixAddress class-instance creation379892
+Node: Sockets.UnixAddress-accessing380421
+Node: Sockets.UnixAddress-printing380846
+Node: Sockets.UnixAddress-testing381141
+Node: Sockets.UnixDatagramSocketImpl381420
+Node: Sockets.UnixDatagramSocketImpl-socket operations381952
+Node: Sockets.UnixSocketImpl382212
+Node: Sockets.UnixSocketImpl-socket operations382710
+Node: Sockets.WriteBuffer382938
+Node: Sockets.WriteBuffer-accessing-writing383487
+Node: Sockets.WriteBuffer-buffer handling383867
+Node: Sockets.WriteBuffer-testing384419
+Node: ZLib package384650
+Node: ZLib.DeflateStream385774
+Node: ZLib.DeflateStream class-instance creation386159
+Node: ZLib.DeflateWriteStream386636
+Node: ZLib.GZipDeflateStream387010
+Node: ZLib.GZipDeflateStream class-instance creation387430
+Node: ZLib.GZipDeflateWriteStream387923
+Node: ZLib.GZipInflateStream388296
+Node: ZLib.InflateStream388652
+Node: ZLib.RawDeflateStream389011
+Node: ZLib.RawDeflateStream class-instance creation389418
+Node: ZLib.RawDeflateWriteStream390151
+Node: ZLib.RawDeflateWriteStream class-instance creation390577
+Node: ZLib.RawInflateStream391064
+Node: ZLib.RawInflateStream-positioning391460
+Node: ZLib.ZlibError392551
+Node: ZLib.ZlibError-accessing392923
+Node: ZLib.ZlibReadStream393191
+Node: ZLib.ZlibReadStream-accessing-reading393653
+Node: ZLib.ZlibReadStream-streaming394243
+Node: ZLib.ZlibStream395059
+Node: ZLib.ZlibStream class-accessing395580
+Node: ZLib.ZlibStream class-instance creation396305
+Node: ZLib.ZlibStream-streaming396719
+Node: ZLib.ZlibWriteStream397162
+Node: ZLib.ZlibWriteStream-streaming397578
+Node: XML/XPath/XSL packages399413
+Node: Building a DOM from XML399787
+Node: Building XML405242
+Node: Using DTDs408429
+Node: XSL Processing411720
+Node: Attributions413176
+Node: Class index413570
+Node: Method index425226
+Node: Cross-reference635410
+
+End Tag Table

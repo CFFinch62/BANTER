@@ -1,0 +1,14 @@
+<package>
+  <name>DebugTools</name>
+
+  <test>
+    <sunit>DebuggerTest</sunit>
+    <filein>debugtests.st</filein>
+  </test>
+
+  <filein>DebugTools.st</filein>
+
+  <file>DebugTools.st</file>
+  <file>debugtests.st</file>
+  <file>ChangeLog</file>
+</package>

@@ -1,0 +1,5 @@
+* support downloading STAR files (DownloadCommand)
+* support downloading STAR files through package.xml
+* check out cleanup of WebEntity streams
+* ???
+* PROFIT!

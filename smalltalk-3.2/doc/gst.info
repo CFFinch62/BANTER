@@ -1,0 +1,184 @@
+This is gst.info, produced by makeinfo version 4.13 from
+/home/pbonzini/devel/gst/+build/doc/../../doc/gst-fixed.texi.
+
+INFO-DIR-SECTION Software development
+START-INFO-DIR-ENTRY
+* Smalltalk: (gst).             The GNU Smalltalk user's guide.
+END-INFO-DIR-ENTRY
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.2 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with no Front-Cover Texts,
+     and with no Back-Cover Texts.  A copy of the license is included
+     in the section entitled "GNU Free Documentation License".
+
+
+Indirect:
+gst.info-1: 673
+gst.info-2: 300426
+
+Tag Table:
+(Indirect)
+Node: Top673
+Node: Overview5611
+Node: Using GNU Smalltalk8330
+Node: Invocation8898
+Ref: Invocation-Footnote-115440
+Ref: Invocation-Footnote-215593
+Node: Operation15711
+Node: Command-line processing16437
+Node: Loading or creating an image17967
+Ref: Loading or creating an image-Footnote-120443
+Ref: Loading or creating an image-Footnote-220590
+Node: Starting the system20758
+Ref: Starting the system-Footnote-121521
+Node: Syntax21714
+Ref: Syntax-Footnote-125659
+Node: Test suite26354
+Node: Legal concerns26841
+Node: GPL27344
+Node: LGPL29303
+Ref: LGPL-Footnote-131362
+Node: Features31445
+Node: Extended streams33063
+Node: Regular expressions34766
+Ref: Regular expressions-Footnote-139551
+Node: Namespaces39639
+Node: Disk file-IO52599
+Node: Object dumping54966
+Node: Dynamic loading55566
+Node: Documentation56767
+Node: Memory access58316
+Node: GC60809
+Ref: GC-Footnote-172078
+Ref: GC-Footnote-272437
+Ref: GC-Footnote-372827
+Ref: GC-Footnote-473060
+Node: Security73115
+Node: Special objects73263
+Node: Packages78415
+Node: GUI88160
+Node: Smalltalk-in-Smalltalk89554
+Node: Database91931
+Node: Locales94005
+Ref: Locales-Footnote-1101692
+Ref: Locales-Footnote-2101778
+Ref: Locales-Footnote-3101846
+Node: Seaside102021
+Node: Swazoo103812
+Node: SUnit105568
+Ref: SUnit-Footnote-1113646
+Node: Network support113888
+Node: XML115238
+Node: Other packages115897
+Node: Emacs116801
+Node: Editing117359
+Node: Interactor118325
+Node: C and Smalltalk122793
+Node: External modules123672
+Ref: External modules-Footnote-1129102
+Node: C callout129148
+Node: C data types140028
+Ref: C data types-Footnote-1149804
+Node: Smalltalk types149870
+Node: Smalltalk callin160881
+Node: Smalltalk callbacks170274
+Ref: Smalltalk callbacks-Footnote-1172573
+Node: Other C functions172650
+Ref: Other C functions-Footnote-1182764
+Node: Object representation183071
+Node: Using Smalltalk190142
+Node: Incubator193673
+Node: Tutorial198897
+Node: Getting started200724
+Node: Starting Smalltalk201140
+Node: Saying hello201659
+Ref: Saying hello-Footnote-1202215
+Node: What happened202439
+Ref: What happened-Footnote-1204045
+Ref: What happened-Footnote-2204344
+Node: Doing math204629
+Node: Math in Smalltalk206311
+Node: Some classes207390
+Node: Arrays208094
+Ref: Arrays-Footnote-1210508
+Ref: Arrays-Footnote-2210893
+Node: Sets210996
+Node: Dictionaries214832
+Node: Closing thoughts216455
+Node: The hierarchy217463
+Node: Class Object218246
+Node: Animals219143
+Node: But why222012
+Node: Creating classes223029
+Node: A new class224976
+Node: Documenting the class225904
+Node: Defining methods227250
+Ref: Defining methods-Footnote-1231492
+Node: Instance methods231785
+Ref: Instance methods-Footnote-1233186
+Node: A look at our object233407
+Node: Moving money around235599
+Node: Next coming236418
+Node: Creating subclasses236865
+Node: The Savings class237624
+Ref: The Savings class-Footnote-1241289
+Ref: The Savings class-Footnote-2241607
+Node: The Checking class241867
+Node: Writing checks243042
+Node: Code blocks (I)245000
+Node: Conditions245616
+Ref: Conditions-Footnote-1248772
+Node: Iteration248993
+Ref: Iteration-Footnote-1256470
+Node: Code blocks (II)256993
+Ref: Code blocks (II)-Footnote-1257848
+Node: Integer loops258117
+Node: Intervals258675
+Node: Invoking code blocks259294
+Ref: Invoking code blocks-Footnote-1262225
+Node: Debugging262347
+Node: Simple errors263285
+Node: Nested calls264564
+Node: Looking at objects267054
+Ref: Looking at objects-Footnote-1268311
+Node: More subclassing268396
+Node: The existing hierarchy269724
+Ref: The existing hierarchy-Footnote-1275372
+Node: Playing with Arrays275519
+Ref: Playing with Arrays-Footnote-1279580
+Node: New kinds of Numbers280123
+Ref: New kinds of Numbers-Footnote-1285307
+Node: Inheritance and Polymorphism285409
+Node: Streams287654
+Node: The output stream288772
+Ref: The output stream-Footnote-1289683
+Node: Your own stream289776
+Node: Files293182
+Node: Dynamic Strings293825
+Node: Exception handling295459
+Node: Creating exceptions298977
+Node: Raising exceptions300426
+Node: Handling exceptions301902
+Node: When an exception isn't handled306057
+Node: Creating new exception classes307167
+Node: Hooking into the stack unwinding308581
+Node: Handler stack unwinding caveat310328
+Node: Behind the scenes311869
+Node: Inside Arrays312474
+Ref: Inside Arrays-Footnote-1321281
+Ref: Inside Arrays-Footnote-2321358
+Ref: Inside Arrays-Footnote-3321419
+Ref: Inside Arrays-Footnote-4321577
+Ref: Inside Arrays-Footnote-5321657
+Node: Two flavors of equality321816
+Node: Why is #new there?!?324492
+Ref: Why is #new there?!?-Footnote-1329434
+Node: Performance329504
+Ref: Performance-Footnote-1334124
+Ref: Performance-Footnote-2334205
+Node: And now334314
+Node: The syntax336918
+
+End Tag Table
