@@ -1,4 +1,0 @@
-2008-09-01  Paolo Bonzini  <bonzini@gnu.org>
-
-	* examples/Seaside-Tests-Functional.st: Change to #seasideString.
-
