@@ -19,6 +19,17 @@ from app.themes import SyntaxColors
 if TYPE_CHECKING:
     from app.language import LanguageProvider
 
+# Comment prefix used by "Comment Selection" / "Uncomment Selection" and
+# by the auto-indent's "does this line open a block" check below.
+COMMENT_PREFIX = "# "
+
+
+def _line_opens_block(line: str) -> bool:
+    """True if `line` (stripped) ends with ':', i.e. the next, more-indented
+    lines belong to it (Python-style: colon + indent)."""
+    text = line.strip()
+    return bool(text) and text.endswith(":")
+
 
 class _LineNumberArea(QWidget):
     def __init__(self, editor: "CodeEditor"):
@@ -43,6 +54,11 @@ class CodeEditor(QPlainTextEdit):
         self._theme = None
         self._highlighter: Optional[QSyntaxHighlighter] = None
 
+        self._tab_width = 4
+        self._show_line_numbers = True
+        self._highlight_line_enabled = True
+        self._auto_indent_enabled = True
+
         font = QFont("JetBrains Mono", 11)
         self.setFont(font)
         self.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
@@ -56,6 +72,23 @@ class CodeEditor(QPlainTextEdit):
         self.updateRequest.connect(self._update_line_number_area)
         self.cursorPositionChanged.connect(self._highlight_current_line)
         self._update_line_number_area_width()
+        self._highlight_current_line()
+
+    def apply_settings(self, settings) -> None:
+        """Apply an app.settings.EditorSettings to this editor instance."""
+        font = QFont(settings.font_family, settings.font_size)
+        self.setFont(font)
+        self._tab_width = settings.tab_width
+        self.setTabStopDistance(settings.tab_width * QFontMetrics(font).horizontalAdvance(" "))
+        self.setLineWrapMode(
+            QPlainTextEdit.LineWrapMode.WidgetWidth if settings.word_wrap
+            else QPlainTextEdit.LineWrapMode.NoWrap
+        )
+        self._show_line_numbers = settings.show_line_numbers
+        self._update_line_number_area_width()
+        self._line_number_area.setVisible(settings.show_line_numbers)
+        self._highlight_line_enabled = settings.highlight_current_line
+        self._auto_indent_enabled = settings.auto_indent
         self._highlight_current_line()
 
     def _mark_dirty(self) -> None:
@@ -146,6 +179,8 @@ class CodeEditor(QPlainTextEdit):
     # -- Line number gutter -----------------------------------------------
 
     def line_number_area_width(self) -> int:
+        if not self._show_line_numbers:
+            return 0
         digits = len(str(max(1, self.blockCount())))
         return 10 + self.fontMetrics().horizontalAdvance("9") * digits
 
@@ -165,7 +200,124 @@ class CodeEditor(QPlainTextEdit):
         cr = self.contentsRect()
         self._line_number_area.setGeometry(QRect(cr.left(), cr.top(), self.line_number_area_width(), cr.height()))
 
+    def keyPressEvent(self, event) -> None:
+        if event.key() == Qt.Key.Key_Tab and self.textCursor().hasSelection():
+            self.indent_selection()
+            return
+        if event.key() == Qt.Key.Key_Backtab:
+            self.dedent_selection()
+            return
+
+        if self._auto_indent_enabled and event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
+            super().keyPressEvent(event)
+
+            cursor = self.textCursor()
+            prev_block = cursor.block().previous()
+            if prev_block.isValid():
+                prev_text = prev_block.text().rstrip()
+                indent = len(prev_text) - len(prev_text.lstrip())
+                if _line_opens_block(prev_text):
+                    indent += self._tab_width
+                if indent > 0:
+                    cursor.insertText(" " * indent)
+            return
+
+        super().keyPressEvent(event)
+
+    # -- Indent / dedent / comment selection -------------------------------
+
+    def indent_selection(self) -> None:
+        cursor = self.textCursor()
+        pad = " " * self._tab_width
+        if not cursor.hasSelection():
+            cursor.insertText(pad)
+            return
+
+        start, end = cursor.selectionStart(), cursor.selectionEnd()
+        doc = self.document()
+        start_block = doc.findBlock(start).blockNumber()
+        end_block = doc.findBlock(end if end > start else end).blockNumber()
+
+        cursor.beginEditBlock()
+        for block_num in range(start_block, end_block + 1):
+            block = doc.findBlockByNumber(block_num)
+            block_cursor = QTextCursor(block)
+            block_cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+            block_cursor.insertText(pad)
+        cursor.endEditBlock()
+
+    def dedent_selection(self) -> None:
+        cursor = self.textCursor()
+        start = cursor.selectionStart()
+        end = cursor.selectionEnd() if cursor.hasSelection() else start
+        doc = self.document()
+        start_block = doc.findBlock(start).blockNumber()
+        end_block = doc.findBlock(end).blockNumber()
+
+        cursor.beginEditBlock()
+        for block_num in range(start_block, end_block + 1):
+            block = doc.findBlockByNumber(block_num)
+            text = block.text()
+            strip_count = 0
+            while strip_count < self._tab_width and strip_count < len(text) and text[strip_count] == " ":
+                strip_count += 1
+            if strip_count == 0 and text.startswith("\t"):
+                strip_count = 1
+            if strip_count > 0:
+                block_cursor = QTextCursor(block)
+                block_cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+                block_cursor.movePosition(
+                    QTextCursor.MoveOperation.Right,
+                    QTextCursor.MoveMode.KeepAnchor,
+                    strip_count,
+                )
+                block_cursor.removeSelectedText()
+        cursor.endEditBlock()
+
+    def comment_selection(self) -> None:
+        cursor = self.textCursor()
+        start = cursor.selectionStart()
+        end = cursor.selectionEnd() if cursor.hasSelection() else start
+        doc = self.document()
+        start_block = doc.findBlock(start).blockNumber()
+        end_block = doc.findBlock(end).blockNumber()
+
+        blocks = [doc.findBlockByNumber(n) for n in range(start_block, end_block + 1)]
+        already_commented = all(
+            not block.text().strip() or block.text().lstrip().startswith("#")
+            for block in blocks
+        )
+
+        cursor.beginEditBlock()
+        for block in blocks:
+            text = block.text()
+            if not text.strip():
+                continue
+            block_cursor = QTextCursor(block)
+            block_cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+            if already_commented:
+                lstripped = text.lstrip()
+                lead = len(text) - len(lstripped)
+                if lstripped.startswith(COMMENT_PREFIX):
+                    strip_len = lead + len(COMMENT_PREFIX)
+                elif lstripped.startswith("#"):
+                    strip_len = lead + 1
+                else:
+                    strip_len = 0
+                if strip_len:
+                    block_cursor.movePosition(
+                        QTextCursor.MoveOperation.Right,
+                        QTextCursor.MoveMode.KeepAnchor,
+                        strip_len,
+                    )
+                    block_cursor.removeSelectedText()
+            else:
+                block_cursor.insertText(COMMENT_PREFIX)
+        cursor.endEditBlock()
+
     def paint_line_number_area(self, event) -> None:
+        if not self._show_line_numbers:
+            return
         painter = QPainter(self._line_number_area)
         bg = QColor(self._theme.editor_gutter_bg) if self._theme is not None else QColor("#181825")
         fg = QColor(self._theme.editor_gutter_fg) if self._theme is not None else QColor("#6c7086")
@@ -194,6 +346,9 @@ class CodeEditor(QPlainTextEdit):
             block_number += 1
 
     def _highlight_current_line(self) -> None:
+        if not self._highlight_line_enabled:
+            self.setExtraSelections([])
+            return
         selection = QTextEdit.ExtraSelection()
         color = QColor(self._theme.editor_line_highlight) if self._theme is not None else QColor("#2a2a3c")
         selection.format.setBackground(color)

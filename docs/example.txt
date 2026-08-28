@@ -1,0 +1,5 @@
+This is a plain text file staged in docs/.
+
+Plain text opens exactly as written — no formatting is applied, which makes
+this a good fit for logs, raw notes, or anything where you want the exact
+text preserved on screen.

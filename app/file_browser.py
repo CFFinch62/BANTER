@@ -1,14 +1,16 @@
-import json
+import shutil
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from PyQt6.QtCore import QModelIndex, Qt, pyqtSignal
 from PyQt6.QtWidgets import (
     QListWidget,
     QListWidgetItem,
     QHBoxLayout,
+    QInputDialog,
     QLineEdit,
     QMenu,
+    QMessageBox,
     QToolButton,
     QTreeView,
     QVBoxLayout,
@@ -16,21 +18,28 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QFileSystemModel
 
+from app.settings import SettingsManager
+
 
 class FileBrowserWidget(QWidget):
     """Left-side file explorer with basic navigation, bookmarks, and open requests."""
 
     request_open = pyqtSignal(str)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, settings_manager: Optional[SettingsManager] = None):
         super().__init__(parent)
         self._history: List[str] = []
         self._history_index = -1
-        self._bookmarks: List[str] = []
-        self.bookmarks_file = Path.home() / ".base_ide" / "bookmarks.json"
+        self._settings_manager = settings_manager
         self._setup_ui()
-        self._load_bookmarks()
+        self._refresh_bookmarks()
         self.navigate_to(str(Path.home()))
+
+    @property
+    def _bookmarks(self) -> List[str]:
+        if self._settings_manager is None:
+            return []
+        return self._settings_manager.settings.file_browser.bookmarks
 
     def _setup_ui(self) -> None:
         layout = QVBoxLayout(self)
@@ -104,6 +113,8 @@ class FileBrowserWidget(QWidget):
         self.tree_view.setColumnHidden(1, True)
         self.tree_view.setColumnHidden(2, True)
         self.tree_view.setColumnHidden(3, True)
+        self.tree_view.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.tree_view.customContextMenuRequested.connect(self._show_tree_context_menu)
         layout.addWidget(self.tree_view)
 
     def navigate_to(self, path: str, add_to_history: bool = True) -> None:
@@ -159,35 +170,135 @@ class FileBrowserWidget(QWidget):
     def _refresh_bookmarks(self) -> None:
         self.bookmark_list.clear()
         for bookmark in self._bookmarks:
-            self.bookmark_list.addItem(bookmark)
-
-    def _load_bookmarks(self) -> None:
-        self.bookmarks_file.parent.mkdir(parents=True, exist_ok=True)
-        if self.bookmarks_file.exists():
-            try:
-                self._bookmarks = json.loads(self.bookmarks_file.read_text(encoding="utf-8"))
-            except json.JSONDecodeError:
-                self._bookmarks = []
-        self._refresh_bookmarks()
+            label = Path(bookmark).name or bookmark
+            item = QListWidgetItem(label)
+            item.setData(Qt.ItemDataRole.UserRole, bookmark)
+            item.setToolTip(bookmark)
+            self.bookmark_list.addItem(item)
 
     def _save_bookmarks(self) -> None:
-        self.bookmarks_file.parent.mkdir(parents=True, exist_ok=True)
-        self.bookmarks_file.write_text(json.dumps(self._bookmarks, indent=2), encoding="utf-8")
+        if self._settings_manager is not None:
+            self._settings_manager.save()
 
     def _bookmark_item_clicked(self, item: QListWidgetItem) -> None:
-        self.navigate_to(item.text())
+        self.navigate_to(item.data(Qt.ItemDataRole.UserRole))
 
     def _show_bookmark_menu(self, position) -> None:
         item = self.bookmark_list.itemAt(position)
         if item is None:
             return
+        path = item.data(Qt.ItemDataRole.UserRole)
         menu = QMenu(self)
         remove_action = menu.addAction("Remove bookmark")
         action = menu.exec(self.bookmark_list.mapToGlobal(position))
         if action == remove_action:
-            self._bookmarks.remove(item.text())
+            self._bookmarks.remove(path)
             self._save_bookmarks()
             self._refresh_bookmarks()
+
+    # -- New file / folder / rename / delete -------------------------------
+
+    def _show_tree_context_menu(self, position) -> None:
+        index = self.tree_view.indexAt(position)
+        path = ""
+        target_dir = self.path_bar.text().strip() or str(Path.home())
+
+        if index.isValid():
+            path = self.model.filePath(index)
+            target_dir = path if self.model.isDir(index) else str(Path(path).parent)
+
+        menu = QMenu(self)
+
+        new_file_action = menu.addAction("New File...")
+        new_file_action.triggered.connect(lambda: self._create_new_file(target_dir))
+
+        new_folder_action = menu.addAction("New Folder...")
+        new_folder_action.triggered.connect(lambda: self._create_new_folder(target_dir))
+
+        if index.isValid():
+            menu.addSeparator()
+
+            rename_action = menu.addAction("Rename...")
+            rename_action.triggered.connect(lambda: self._rename_item(path))
+
+            delete_action = menu.addAction("Delete")
+            delete_action.triggered.connect(lambda: self._delete_item(path))
+
+        menu.addSeparator()
+        refresh_action = menu.addAction("Refresh")
+        refresh_action.triggered.connect(self._refresh)
+
+        menu.exec(self.tree_view.viewport().mapToGlobal(position))
+
+    def _create_new_file(self, directory: str) -> None:
+        filename, ok = QInputDialog.getText(self, "New File", "Enter filename:")
+        if not ok or not filename:
+            return
+        new_path = Path(directory) / filename
+        if new_path.exists():
+            QMessageBox.warning(self, "New File", "A file or folder with that name already exists.")
+            return
+        try:
+            new_path.touch()
+        except OSError as exc:
+            QMessageBox.critical(self, "New File", f"Could not create file: {exc}")
+            return
+        self._refresh()
+        self.request_open.emit(str(new_path))
+
+    def _create_new_folder(self, directory: str) -> None:
+        foldername, ok = QInputDialog.getText(self, "New Folder", "Enter folder name:")
+        if not ok or not foldername:
+            return
+        new_path = Path(directory) / foldername
+        if new_path.exists():
+            QMessageBox.warning(self, "New Folder", "A file or folder with that name already exists.")
+            return
+        try:
+            new_path.mkdir(parents=False)
+        except OSError as exc:
+            QMessageBox.critical(self, "New Folder", f"Could not create folder: {exc}")
+            return
+        self._refresh()
+
+    def _rename_item(self, path: str) -> None:
+        old_path = Path(path)
+        new_name, ok = QInputDialog.getText(self, "Rename", "Enter new name:", text=old_path.name)
+        if not ok or not new_name or new_name == old_path.name:
+            return
+        new_path = old_path.parent / new_name
+        if new_path.exists():
+            QMessageBox.warning(self, "Rename", "A file or folder with that name already exists.")
+            return
+        try:
+            old_path.rename(new_path)
+        except OSError as exc:
+            QMessageBox.critical(self, "Rename", f"Could not rename: {exc}")
+            return
+        self._refresh()
+
+    def _delete_item(self, path: str) -> None:
+        path_obj = Path(path)
+        if not path_obj.exists():
+            return
+        item_type = "folder" if path_obj.is_dir() else "file"
+        reply = QMessageBox.question(
+            self,
+            f"Delete {item_type.capitalize()}",
+            f"Are you sure you want to delete this {item_type}?\n{path}",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+        if reply != QMessageBox.StandardButton.Yes:
+            return
+        try:
+            if path_obj.is_dir():
+                shutil.rmtree(path_obj)
+            else:
+                path_obj.unlink()
+        except OSError as exc:
+            QMessageBox.critical(self, "Delete", f"Could not delete {item_type}: {exc}")
+            return
+        self._refresh()
 
     def _update_navigation_state(self) -> None:
         self.back_btn.setEnabled(self._history_index > 0)

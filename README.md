@@ -102,6 +102,19 @@ Command field pointed at it.
   it via `QProcess`. A `FailedToStart` error produces a clear message
   pointing at installing an interpreter and/or fixing the Command field.
 
+## Documentation pane
+A tabbed reference-document reader sits at the far right of the window,
+always full height, independently resizable, toggled from **View → Toggle
+Documentation**. Stage plain text, Markdown, or HTML files in `docs/` —
+double-clicking one in the file browser opens it here instead of as an
+editor tab.
+
+## Themes
+Themes are JSON files in `themes/`, picked from the Theme menu or Edit →
+Preferences → Theme. Drop your own `<name>.json` into
+`~/.config/banter_ide/themes/` to add a custom one — any color field you
+don't specify falls back to the Dark theme's value.
+
 ## Other extension points
 - Expand the file browser with project management features such as new folders, rename, and delete.
 - Add a preferences dialog for editor font size, tab width, etc.

@@ -1,11 +1,16 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Dict, List
+import json
+import sys
+from dataclasses import asdict, dataclass, field
+from pathlib import Path
+from typing import Dict, List, Optional
 
-from PyQt6.QtCore import QObject, QSettings, pyqtSignal
+from PyQt6.QtCore import QObject, QSettings, Qt, pyqtSignal
 from PyQt6.QtGui import QColor, QPalette
 from PyQt6.QtWidgets import QApplication, QWidget
+
+from app.settings import get_config_dir
 
 
 @dataclass
@@ -105,244 +110,85 @@ DARK_THEME = UITheme(
     ),
 )
 
-LIGHT_THEME = UITheme(
-    name="Light",
-    is_dark=False,
-    background="#eff1f5",
-    foreground="#4c4f69",
-    accent="#1e66f5",
-    accent_hover="#2a7afd",
-    panel_background="#e6e9ef",
-    panel_border="#bcc0cc",
-    browser_background="#e6e9ef",
-    browser_item_hover="#acb0be",
-    browser_item_selected="#1e66f5",
-    editor_background="#eff1f5",
-    editor_foreground="#4c4f69",
-    editor_line_highlight="#dce0e8",
-    editor_selection="#acb0be",
-    editor_gutter_bg="#e6e9ef",
-    editor_gutter_fg="#8c8fa1",
-    terminal_background="#dce0e8",
-    terminal_foreground="#4c4f69",
-    scrollbar_background="#e6e9ef",
-    scrollbar_handle="#bcc0cc",
-    scrollbar_handle_hover="#acb0be",
-    button_background="#bcc0cc",
-    button_foreground="#4c4f69",
-    button_hover="#acb0be",
-    button_pressed="#ccd0da",
-    input_background="#ccd0da",
-    input_border="#bcc0cc",
-    input_focus_border="#1e66f5",
-    success="#40a02b",
-    warning="#df8e1d",
-    error="#d20f39",
-    info="#1e66f5",
-    syntax=SyntaxColors(
-        keyword="#1e66f5",
-        builtin="#df8e1d",
-        string="#40a02b",
-        number="#fe640b",
-        comment="#8c8fa1",
-        literal="#179299",
-        operator="#8839ef",
-        identifier="#4c4f69",
-    ),
-)
+_THEMES_DIRNAME = "themes"
 
-GREY_THEME = UITheme(
-    name="Grey",
-    is_dark=True,
-    background="#2b2d30",
-    foreground="#bcbec4",
-    accent="#4a9eff",
-    accent_hover="#5eadff",
-    panel_background="#25262a",
-    panel_border="#3c3f41",
-    browser_background="#25262a",
-    browser_item_hover="#5a5d62",
-    browser_item_selected="#4a9eff",
-    editor_background="#2b2d30",
-    editor_foreground="#bcbec4",
-    editor_line_highlight="#323437",
-    editor_selection="#214283",
-    editor_gutter_bg="#25262a",
-    editor_gutter_fg="#6c6f73",
-    terminal_background="#1e1f22",
-    terminal_foreground="#bcbec4",
-    scrollbar_background="#25262a",
-    scrollbar_handle="#4a5157",
-    scrollbar_handle_hover="#5a5d62",
-    button_background="#4a5157",
-    button_foreground="#bcbec4",
-    button_hover="#5a5d62",
-    button_pressed="#3c3f41",
-    input_background="#3c3f41",
-    input_border="#4a5157",
-    input_focus_border="#4a9eff",
-    success="#6aab73",
-    warning="#d5b778",
-    error="#c75450",
-    info="#4a9eff",
-    syntax=SyntaxColors(
-        keyword="#6897bb",
-        builtin="#d5b778",
-        string="#6a8759",
-        number="#d19a66",
-        comment="#6c6f73",
-        literal="#6897bb",
-        operator="#cc7832",
-        identifier="#bcbec4",
-    ),
-)
 
-SOLARIZED_LIGHT_THEME = UITheme(
-    name="Solarized Light",
-    is_dark=False,
-    background="#fdf6e3",
-    foreground="#657b83",
-    accent="#268bd2",
-    accent_hover="#2aa1f5",
-    panel_background="#eee8d5",
-    panel_border="#93a1a1",
-    browser_background="#eee8d5",
-    browser_item_hover="#839496",
-    browser_item_selected="#268bd2",
-    editor_background="#fdf6e3",
-    editor_foreground="#657b83",
-    editor_line_highlight="#eee8d5",
-    editor_selection="#eee8d5",
-    editor_gutter_bg="#eee8d5",
-    editor_gutter_fg="#93a1a1",
-    terminal_background="#eee8d5",
-    terminal_foreground="#657b83",
-    scrollbar_background="#eee8d5",
-    scrollbar_handle="#93a1a1",
-    scrollbar_handle_hover="#839496",
-    button_background="#93a1a1",
-    button_foreground="#fdf6e3",
-    button_hover="#839496",
-    button_pressed="#eee8d5",
-    input_background="#eee8d5",
-    input_border="#93a1a1",
-    input_focus_border="#268bd2",
-    success="#859900",
-    warning="#b58900",
-    error="#dc322f",
-    info="#268bd2",
-    syntax=SyntaxColors(
-        keyword="#268bd2",
-        builtin="#b58900",
-        string="#859900",
-        number="#cb4b16",
-        comment="#93a1a1",
-        literal="#2aa198",
-        operator="#d33682",
-        identifier="#657b83",
-    ),
-)
+def _bundled_themes_dir() -> Path:
+    """Directory containing the shipped theme JSON files.
 
-SOLARIZED_DARK_THEME = UITheme(
-    name="Solarized Dark",
-    is_dark=True,
-    background="#002b36",
-    foreground="#839496",
-    accent="#268bd2",
-    accent_hover="#2aa1f5",
-    panel_background="#073642",
-    panel_border="#586e75",
-    browser_background="#073642",
-    browser_item_hover="#657b83",
-    browser_item_selected="#268bd2",
-    editor_background="#002b36",
-    editor_foreground="#839496",
-    editor_line_highlight="#073642",
-    editor_selection="#073642",
-    editor_gutter_bg="#073642",
-    editor_gutter_fg="#586e75",
-    terminal_background="#073642",
-    terminal_foreground="#839496",
-    scrollbar_background="#073642",
-    scrollbar_handle="#586e75",
-    scrollbar_handle_hover="#657b83",
-    button_background="#586e75",
-    button_foreground="#fdf6e3",
-    button_hover="#657b83",
-    button_pressed="#073642",
-    input_background="#073642",
-    input_border="#586e75",
-    input_focus_border="#268bd2",
-    success="#859900",
-    warning="#b58900",
-    error="#dc322f",
-    info="#268bd2",
-    syntax=SyntaxColors(
-        keyword="#268bd2",
-        builtin="#b58900",
-        string="#859900",
-        number="#cb4b16",
-        comment="#586e75",
-        literal="#2aa198",
-        operator="#d33682",
-        identifier="#839496",
-    ),
-)
+    PyInstaller extracts --add-data assets into sys._MEIPASS at runtime;
+    when running from source, themes/ sits next to app/ at the project root.
+    """
+    app_root = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent.parent))
+    return app_root / _THEMES_DIRNAME
 
-HIGH_CONTRAST_THEME = UITheme(
-    name="High Contrast",
-    is_dark=True,
-    background="#000000",
-    foreground="#ffffff",
-    accent="#4fc3f7",
-    accent_hover="#81d4fa",
-    panel_background="#0a0a0a",
-    panel_border="#444444",
-    browser_background="#0a0a0a",
-    browser_item_hover="#555555",
-    browser_item_selected="#4fc3f7",
-    editor_background="#000000",
-    editor_foreground="#ffffff",
-    editor_line_highlight="#1a1a1a",
-    editor_selection="#264f78",
-    editor_gutter_bg="#0a0a0a",
-    editor_gutter_fg="#888888",
-    terminal_background="#0a0a0a",
-    terminal_foreground="#ffffff",
-    scrollbar_background="#0a0a0a",
-    scrollbar_handle="#555555",
-    scrollbar_handle_hover="#777777",
-    button_background="#333333",
-    button_foreground="#ffffff",
-    button_hover="#555555",
-    button_pressed="#222222",
-    input_background="#1a1a1a",
-    input_border="#555555",
-    input_focus_border="#4fc3f7",
-    success="#00ff00",
-    warning="#ffff00",
-    error="#ff4444",
-    info="#4fc3f7",
-    syntax=SyntaxColors(
-        keyword="#6dcfff",
-        builtin="#ffd700",
-        string="#00ff7f",
-        number="#ff8c00",
-        comment="#888888",
-        literal="#00e5ff",
-        operator="#ff69b4",
-        identifier="#ffffff",
-    ),
-)
 
-THEMES: Dict[str, UITheme] = {
-    "dark": DARK_THEME,
-    "light": LIGHT_THEME,
-    "grey": GREY_THEME,
-    "solarized_light": SOLARIZED_LIGHT_THEME,
-    "solarized_dark": SOLARIZED_DARK_THEME,
-    "high_contrast": HIGH_CONTRAST_THEME,
-}
+def _user_themes_dir() -> Path:
+    """Directory for user-authored/dropped-in theme files, alongside settings.json."""
+    return get_config_dir() / _THEMES_DIRNAME
+
+
+def _theme_from_dict(data: dict, fallback: UITheme) -> UITheme:
+    """Build a UITheme from a parsed JSON dict, filling any missing field
+    (or an entirely missing/invalid file) from `fallback` so a partial or
+    stale theme file degrades gracefully instead of crashing the app."""
+    fallback_dict = asdict(fallback)
+    syntax_data = data.get("syntax") or {}
+    fallback_syntax = fallback_dict["syntax"]
+    syntax = SyntaxColors(**{
+        key: syntax_data.get(key, default) for key, default in fallback_syntax.items()
+    })
+
+    kwargs = {
+        key: data.get(key, default)
+        for key, default in fallback_dict.items()
+        if key != "syntax"
+    }
+    kwargs["syntax"] = syntax
+    return UITheme(**kwargs)
+
+
+def _load_theme_file(path: Path, fallback: UITheme) -> Optional[UITheme]:
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"Warning: could not load theme {path}: {exc}")
+        return None
+    data.setdefault("name", path.stem.replace("_", " ").title())
+    try:
+        return _theme_from_dict(data, fallback)
+    except (TypeError, ValueError) as exc:
+        print(f"Warning: invalid theme {path}: {exc}")
+        return None
+
+
+def _discover_theme_files() -> List[Path]:
+    files: List[Path] = []
+    bundled_dir = _bundled_themes_dir()
+    if bundled_dir.is_dir():
+        files.extend(sorted(bundled_dir.glob("*.json")))
+    user_dir = _user_themes_dir()
+    if user_dir.is_dir():
+        files.extend(sorted(user_dir.glob("*.json")))
+    return files
+
+
+def _build_theme_registry() -> Dict[str, UITheme]:
+    """Load every theme JSON file (bundled, then user overrides/additions —
+    a user file with the same filename stem as a bundled one wins) into a
+    {slug: UITheme} registry. Falls back to the hardcoded DARK_THEME if no
+    theme file loads at all, so the app can never end up with zero themes."""
+    registry: Dict[str, UITheme] = {}
+    for path in _discover_theme_files():
+        theme = _load_theme_file(path, DARK_THEME)
+        if theme is not None:
+            registry[path.stem] = theme
+    if not registry:
+        registry["dark"] = DARK_THEME
+    return registry
+
+
+THEMES: Dict[str, UITheme] = _build_theme_registry()
 
 
 class ThemeManager(QObject):
@@ -350,7 +196,7 @@ class ThemeManager(QObject):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self._settings = QSettings("BaseIDE", "Base IDE")
+        self._settings = QSettings("BanterIDE", "Banter IDE")
         self._current_theme_name = self._load_saved_theme()
         self._current_theme = THEMES.get(self._current_theme_name, DARK_THEME)
 
@@ -359,6 +205,9 @@ class ThemeManager(QObject):
 
     def current_theme(self) -> UITheme:
         return self._current_theme
+
+    def get_theme(self, name: str) -> UITheme:
+        return THEMES.get(name, self._current_theme)
 
     def current_theme_name(self) -> str:
         return self._current_theme_name
@@ -374,10 +223,22 @@ class ThemeManager(QObject):
     def apply_to_widget(self, widget: QWidget | None) -> None:
         if widget is None:
             return
-        theme = self.current_theme()
+        self._apply_recursive(widget, self.current_theme())
+
+    def _apply_recursive(self, widget: QWidget, theme: UITheme) -> None:
+        """Depth-first theme walk that stops descending once it reaches a
+        widget with its own apply_theme() — that widget owns styling for
+        its whole subtree, so a widget like TerminalPane or DocPanel can
+        rely on its own children (a QLineEdit, a QTextBrowser tab, ...)
+        never getting silently re-stamped with the generic stylesheet
+        afterwards. Using findChildren's default recursive search here
+        instead would flatten the whole tree and defeat that boundary.
+        """
         self._apply_theme_to_widget(widget, theme)
-        for child in widget.findChildren(QWidget):
-            self._apply_theme_to_widget(child, theme)
+        if hasattr(widget, "apply_theme"):
+            return
+        for child in widget.findChildren(QWidget, options=Qt.FindChildOption.FindDirectChildrenOnly):
+            self._apply_recursive(child, theme)
 
     def _apply_theme_to_widget(self, widget: QWidget, theme: UITheme) -> None:
         palette = widget.palette()
@@ -425,7 +286,8 @@ class ThemeManager(QObject):
         """
 
     def _load_saved_theme(self) -> str:
-        saved = self._settings.value("theme", "dark")
+        default_name = "dark" if "dark" in THEMES else next(iter(THEMES))
+        saved = self._settings.value("theme", default_name)
         if isinstance(saved, str) and saved in THEMES:
             return saved
-        return "dark"
+        return default_name
